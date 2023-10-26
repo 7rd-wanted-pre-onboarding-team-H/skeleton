@@ -58,7 +58,7 @@ export const helloRoute = createRoute({
 		}),
 		// query string에서 검사할 스키마를 정의합니다.
 		query: z.object({
-			age: z.number().int().positive().openapi({
+			age: z.coerce.number().int().positive().openapi({
 				param: { name: "age", in: "query", required: false },
 				example: 20,
 			}),
