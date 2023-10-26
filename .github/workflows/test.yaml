@@ -1,0 +1,38 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint_and_fmt:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        deno: [v1.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deno 설치
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: ${{ matrix.deno }}
+      - name: 린터 실행
+        run: deno lint
+      - name: 포매터 실행
+        run: deno fmt --check
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        deno: [v1.x, canary]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deno 설치
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: ${{ matrix.deno }}
+      - name: 타입 체크 및 테스트 실행
+        run: deno test -A
