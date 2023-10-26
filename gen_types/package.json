@@ -1,12 +1,12 @@
 {
-  "name": "gen_types",
-  "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "gen": "npx kysely-codegen --dialect sqlite --out-file=../types.ts"
-  },
-  "dependencies": {
-    "better-sqlite3": "^9.0.0",
-    "kysely-codegen": "^0.11.0"
-  }
+	"name": "gen_types",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"gen": "npx kysely-codegen --dialect sqlite --out-file=../types.ts"
+	},
+	"dependencies": {
+		"better-sqlite3": "^9.0.0",
+		"kysely-codegen": "^0.11.0"
+	}
 }

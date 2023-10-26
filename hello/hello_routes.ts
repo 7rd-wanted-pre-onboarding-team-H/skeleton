@@ -25,4 +25,3 @@ export const helloRoute = createRoute({
 		},
 	},
 })
-

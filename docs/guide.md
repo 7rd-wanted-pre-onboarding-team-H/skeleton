@@ -129,9 +129,9 @@ const db = kyselyFrom(Deno.args[0] ?? "test.db")
 const app = new OpenAPIHono()
 	// 미들웨어를 등록합니다.
 	.use("*", logger(), prettyJSON())
-  // 루트 경로에 컨트롤러를 등록합니다.
+	// 루트 경로에 컨트롤러를 등록합니다.
 	.route("", helloController())
-  // posting 경로에 컨트롤러를 등록하고, DB를 인자로 넘깁니다.
+	// posting 경로에 컨트롤러를 등록하고, DB를 인자로 넘깁니다.
 	.route("", postingController(db))
 
 // Swagger UI를 사용합니다. (경로: "/openapi")

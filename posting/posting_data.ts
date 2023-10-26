@@ -11,5 +11,5 @@ export const getSinglePosting = (db: Kysely<DB>, id: number) =>
 export const updateHashtag = (db: Kysely<DB>, id: number) =>
 	db
 		.updateTable("hashtag")
-        .set({ content: "test" })
-        .where("hashtag.id", "=", id)
+		.set({ content: "test" })
+		.where("hashtag.id", "=", id)

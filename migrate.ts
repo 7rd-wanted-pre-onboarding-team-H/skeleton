@@ -40,7 +40,7 @@ export const upPosting = (db: Kysely<unknown>) =>
 				.check(sql`type IN ('facebook', 'twitter', 'instagram', 'threads')`))
 		.addColumn(...text("title"))
 		.addColumn(...text("content"))
-        .addColumn(...text("content_id"))
+		.addColumn(...text("content_id"))
 		.addColumn(...count("view_count"))
 		.addColumn(...count("like_count"))
 		.addColumn(...count("share_count"))
@@ -62,10 +62,10 @@ export const up = async (db: Kysely<unknown>) =>
 	await Promise.all(ups.map((up) => up(db).execute()))
 
 export const down = async (db: Kysely<unknown>) => {
-    await db.schema.dropTable(tables.postingToHashtag).execute()
-    await db.schema.dropTable(tables.posting).execute()
-    await db.schema.dropTable(tables.hashtag).execute()
-    await db.schema.dropTable(tables.user).execute()
+	await db.schema.dropTable(tables.postingToHashtag).execute()
+	await db.schema.dropTable(tables.posting).execute()
+	await db.schema.dropTable(tables.hashtag).execute()
+	await db.schema.dropTable(tables.user).execute()
 }
 
 if (import.meta.main) {

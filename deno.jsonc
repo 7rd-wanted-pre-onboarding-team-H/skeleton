@@ -1,8 +1,8 @@
 {
 	"tasks": {
 		"dev": "deno run -A --watch main.ts",
-        "prod": "deno run --allow-read --allow-write --allow-net=0.0.0.0:3000 main.ts",
-        "test": "deno test -A --watch --no-check",
+		"prod": "deno run --allow-read --allow-write --allow-net=0.0.0.0:3000 main.ts",
+		"test": "deno test -A --watch --no-check",
 		"db:seed": "deno run -A seed.ts test.db",
 		"db:gen-types": "cd gen_types && npm run gen -- --url='../test.db'",
 		"db:init": "deno task db:seed && deno task db:gen-types"

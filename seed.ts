@@ -88,7 +88,7 @@ if (import.meta.main) {
 	try {
 		await down(db as Kysely<unknown>)
 	} catch (e) {
-        void e
+		void e
 	}
 	await up(db as Kysely<unknown>)
 	await seed(db)
