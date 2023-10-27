@@ -34,7 +34,9 @@ export const userSchema = z.object({
 	created_at: z.string(),
 	email: z.string(),
 	id: z.number(),
+	name: z.string(),
 	password: z.string(),
+	is_validated: z.boolean(),
 })
 
 export const dbSchema = z.object({

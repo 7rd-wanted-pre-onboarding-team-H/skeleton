@@ -7,9 +7,11 @@ import { down, up } from "./migrate.ts"
 
 export const seedUser = async (db: Kysely<DB>) => {
 	const users = Array.from({ length: 10 }, () => ({
+		name: faker.person.fullName(),
 		email: faker.internet.email(),
 		password: faker.internet.password(),
 		created_at: faker.date.recent({ days: 30, refDate: new Date("2023-01-01") }).toISOString(),
+		is_validated: Number(faker.datatype.boolean({ probability: 0.75 })),
 	}))
 
 	await db.insertInto("user").values(users).execute()

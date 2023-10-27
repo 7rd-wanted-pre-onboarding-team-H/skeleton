@@ -32,6 +32,8 @@ export interface User {
 	created_at: Generated<string>
 	email: string
 	id: Generated<number>
+	is_validated: Generated<number>
+	name: string
 	password: string
 }
 
