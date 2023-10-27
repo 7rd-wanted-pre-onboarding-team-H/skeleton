@@ -14,6 +14,6 @@ Deno.test(`put /likes/{id}`, async (t) => {
 		const json = await res.json()
 
 		assertEquals(res.status, 200)
-		assertEquals(json, { message: "좋아요 진짜 성공 :895" })
+		assertEquals(json, { message: "좋아요 진짜 성공 :901" })
 	})
 })
