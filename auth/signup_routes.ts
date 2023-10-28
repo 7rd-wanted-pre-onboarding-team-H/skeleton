@@ -1,7 +1,22 @@
 import { createRoute, z } from "hono_zod_openapi"
-import { openApiJson } from "../utils.ts"
-import { postingSchema } from "../schemas.ts"
+import { errorJson, openApiJson } from "../utils.ts"
 import { passwordSchema } from "./password_rules.ts"
+
+const body = z.object({
+	name: z.string().min(1).openapi({
+		description: "계정명입니다. 중복 생성이 불가합니다.",
+		example: "dani",
+	}),
+	email: z.string().email().openapi({
+		description: "이메일 주소로, 중복 생성이 가능합니다.",
+		example: "wanted@gmail.com",
+	}),
+	password: passwordSchema.openapi({ example: "password123!" }),
+})
+
+const otp = z.object({
+	otp: z.string().length(6).regex(/^[0-9]+$/).openapi({ example: "123456" }),
+})
 
 export const signUpRoute = createRoute({
 	method: "post",
@@ -11,26 +26,40 @@ export const signUpRoute = createRoute({
 	request: {
 		body: {
 			description: "회원가입 요청을 위한 정보를 입력합니다.",
-			content: {
-				"application/json": {
-					schema: z.object({
-						name: z.string().min(1).openapi({ example: "dani" }),
-						email: z.string().email().openapi({ example: "wanted@gmail.com" }),
-						password: passwordSchema.openapi({ example: "password123!" }),
-					}),
-				},
-			},
+			...openApiJson(body),
 		},
 	},
 	responses: {
 		201: {
 			description: "회원가입 인증용 OTP를 발송합니다.",
-			...openApiJson(z.object({
-				otp: z.string().length(6).regex(/^[0-9]+$/).openapi({ example: "123456" }),
-			})),
+			...openApiJson(otp),
+		},
+		409: {
+			description: "이미 존재하는 사용자입니다.",
+			...errorJson(z.string().openapi({ example: "이미 존재하는 사용자입니다." })),
+		},
+	},
+})
+
+export const verifyOtpRoute = createRoute({
+	method: "post",
+	path: "/auth/otp",
+	tags: ["auth"],
+	summary: "회원가입 인증용 OTP를 검증합니다.",
+	request: {
+		body: {
+			description: "회원가입 인증용 OTP를 입력합니다.",
+			...openApiJson(body.merge(otp)),
+		},
+	},
+	responses: {
+		200: {
+			description: "회원가입이 완료되었습니다.",
+			...openApiJson(body.omit({ password: true })),
 		},
 		400: {
-			description: "요청이 잘못되었습니다.",
+			description: "인증정보가 일치하지 않습니다.",
+			...errorJson(z.string().openapi({ example: "OTP가 일치하지 않습니다." })),
 		},
 	},
 })
