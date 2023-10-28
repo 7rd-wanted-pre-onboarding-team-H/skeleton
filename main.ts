@@ -3,7 +3,7 @@ import { prettyJSON } from "hono/pretty-json"
 import { OpenAPIHono } from "hono_zod_openapi"
 import { serveOpenapi } from "./swagger.ts"
 import { helloController } from "./hello/mod.ts"
-import { postingController } from "./posting/mod.ts"
+import { postingController, postingListController, postingShareController } from "./posting/mod.ts"
 import { likesController } from "./likes/mod.ts"
 import { signupController } from "./auth/mod.ts"
 import { kyselyFrom } from "./kysely_from.ts"
@@ -16,6 +16,8 @@ const app = new OpenAPIHono()
 	.route("", helloController())
 	.route("", postingController(db))
 	.route("", likesController(db))
+	.route("", postingListController(db))
+	.route("", postingShareController(db))
 
 serveOpenapi(app as OpenAPIHono)
 

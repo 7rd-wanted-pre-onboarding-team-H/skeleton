@@ -4,7 +4,7 @@ import { postingController } from "./posting_controller.ts"
 
 const { client } = await tempAppFrom(postingController)
 
-Deno.test(`GET /postings/{id}`, async (t) => {
+Deno.test(`GET /postings/detail/{id}`, async (t) => {
 	await t.step("존재하지 않는 글 요청", async () => {
 		const res = await client.postings[":id"].$get({ param: { id: "0" } })
 		assertEquals(res.status, 404)
