@@ -17,7 +17,7 @@ export interface Posting {
 	like_count: Generated<number>
 	share_count: Generated<number>
 	title: string
-	type: string
+	type: "facebook" | "twitter" | "instagram" | "threads"
 	updated_at: Generated<string>
 	user_id: number
 	view_count: Generated<number>

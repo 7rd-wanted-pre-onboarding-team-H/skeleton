@@ -14,7 +14,12 @@ export const postingSchema = z.object({
 	like_count: z.number(),
 	share_count: z.number(),
 	title: z.string(),
-	type: z.string(),
+	type: z.union([
+		z.literal("facebook"),
+		z.literal("instagram"),
+		z.literal("twitter"),
+		z.literal("threads"),
+	]),
 	updated_at: z.string(),
 	user_id: z.number(),
 	view_count: z.number(),
