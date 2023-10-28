@@ -2,8 +2,10 @@ import { ColumnDefinitionBuilder as CDB, Kysely, sql } from "kysely"
 import { DB as Database } from "sqlite"
 import { DenoSqliteDialect } from "kysely_sqlite"
 
-const primaryKey = (col: CDB) => col.notNull().primaryKey().autoIncrement()
 const text = (name: string) => [name, "text", (col: CDB) => col.notNull()] as const
+const uniqueText = (name: string) => [name, "text", (col: CDB) => col.notNull().unique()] as const
+
+const primaryKey = (col: CDB) => col.notNull().primaryKey().autoIncrement()
 const count = (name: string) => [name, "integer", (col: CDB) => col.notNull().defaultTo(0)] as const
 const timestamp = (name: "created_at" | "updated_at") =>
 	[name, "text", (col: CDB) => col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`)] as const
@@ -21,7 +23,7 @@ export const upUser = (db: Kysely<unknown>) =>
 	db.schema
 		.createTable(tables.user)
 		.addColumn(...id)
-		.addColumn(...text("name"))
+		.addColumn(...uniqueText("name"))
 		.addColumn(...text("email"))
 		.addColumn(...text("password"))
 		.addColumn(...timestamp("created_at"))
@@ -31,7 +33,7 @@ export const upHashTag = (db: Kysely<unknown>) =>
 	db.schema
 		.createTable(tables.hashtag)
 		.addColumn(...id)
-		.addColumn(...text("content"))
+		.addColumn(...uniqueText("content"))
 
 export const upPosting = (db: Kysely<unknown>) =>
 	db.schema
