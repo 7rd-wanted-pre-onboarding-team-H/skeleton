@@ -20,6 +20,7 @@ export const likesController = (db: Kysely<DB>) =>
 				const url = `${endpoint}${id}`
 
 				const response = await fetch(url, { method: "POST" })
+                await response.body?.cancel()
 
 				if (response.status == 200) {
 					// 좋아요 성공
