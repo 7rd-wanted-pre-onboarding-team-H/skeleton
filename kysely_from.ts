@@ -1,4 +1,4 @@
-import { Kysely } from "kysely"
+import { Kysely, KyselyConfig } from "kysely"
 import { DenoSqliteDialect } from "kysely_sqlite"
 import { DB } from "./types.ts"
 import { DB as SQLite } from "sqlite"
@@ -8,10 +8,10 @@ import { DB as SQLite } from "sqlite"
  *
  * @param path - SQLite 데이터베이스 파일 경로, `:memory:` 를 사용하면 메모리에 저장됩니다.
  */
-export const kyselyFrom = (path: string) => {
+export const kyselyFrom = (path: string, option?: Omit<KyselyConfig, "dialect">) => {
 	const database = new SQLite(path)
 	const dialect = new DenoSqliteDialect({ database })
-	const db = new Kysely<DB>({ dialect })
+	const db = new Kysely<DB>({ ...option, dialect })
 
 	return db
 }
