@@ -33,7 +33,7 @@ export const seedPosting = async (db: Kysely<DB>) => {
 		{ length: 10 },
 		(_, i) => ({
 			id: i + 1,
-			type: faker.helpers.arrayElement(["facebook", "twitter", "instagram", "threads"]),
+			type: faker.helpers.arrayElement(["facebook", "twitter", "instagram", "threads"] as const),
 			title: faker.lorem.sentence({ min: 1, max: 3 }),
 			content: faker.lorem.paragraph(1),
 			content_id: faker.string.nanoid(),
