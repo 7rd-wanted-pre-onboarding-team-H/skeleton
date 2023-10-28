@@ -1,6 +1,6 @@
 {
-    "facebook" : "https://www.facebook.com/likes/",
-    "instagram" : "https://www.instagram.com/likes/",
-    "twitter" : "https://www.twitter.com/likes/",
-    "threads" : "https://www.threads.net/likes/"
+	"facebook": "https://www.facebook.com",
+	"instagram": "https://www.instagram.com",
+	"twitter": "https://www.twitter.com",
+	"threads": "https://www.threads.net"
 }
