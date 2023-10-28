@@ -16,22 +16,15 @@ export const likesController = (db: Kysely<DB>) =>
 
 			if (likes) {
 				const endpoint = endpoints[likes.type]
-				const url = `${endpoint}${id}`
+				const url = `${endpoint}/likes/${id}`
 
 				const response = await fetch(url, { method: "POST" })
-                await response.body?.cancel()
+				await response.body?.cancel()
+                const updatedLikes = likes.like_count + 1
+                await updateLikes(db, id, updatedLikes)
+                const message = response.status === 200 ? '진짜' : '가짜'
 
-				if (response.status == 200) {
-					// 좋아요 성공
-					// note : sns서버 또는 게시물의 좋아요를 가지고 와야 하지만 임시로 좋아요 수만 증가하게 개발 추후 수정 필요
-					await updateLikes(db, id, likes.like_count + 1)
-					return c.jsonT({ message: `좋아요 진짜 성공 :${likes.like_count}` })
-				} else {
-					// 실패 처리
-					// note : 임시로 sns서버에 좋아요를 가지고 오지 못했을 때도 성공으로 하여 기능 구현함, 추후 수정 필요
-					await updateLikes(db, id, likes.like_count + 1)
-					return c.jsonT({ message: `좋아요 가짜 성공 :${likes.like_count}` })
-				}
+                return c.jsonT({ message: `좋아요 ${message} 성공`, like_count: updatedLikes })
 			} else {
 				// 게시글 없음
 				return c.jsonT({ error: "게시물이 없습니다" }, 404)

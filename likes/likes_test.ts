@@ -1,4 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.204.0/assert/assert_equals.ts"
+import { assertObjectMatch } from "https://deno.land/std@0.204.0/assert/assert_object_match.ts"
 import { tempAppFrom } from "../test_utils.ts"
 import { likesController } from "./likes_controller.ts"
 
@@ -19,6 +20,6 @@ Deno.test(`put /likes/{id}`, async (t) => {
 		const json = await res.json()
 
 		assertEquals(res.status, 200)
-		assertEquals(json, { message: `좋아요 가짜 성공 :${like_count}` })
+		assertObjectMatch(json, { like_count: like_count + 1 })
 	})
 })
