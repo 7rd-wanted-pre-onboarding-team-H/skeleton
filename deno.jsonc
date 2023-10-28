@@ -3,8 +3,14 @@
 		"dev": "deno run -A --watch main.ts",
 		"prod": "deno run --allow-read --allow-write --allow-net=0.0.0.0:3000 main.ts",
 		"test": "deno test -A --watch --no-check",
+
+		// test.db의 DB 스키마를 초기화합니다.
+		"db:migrate": "deno run -A migrate.ts test.db",
+		// 더미값이 채워진 test.db를 생성합니다.
 		"db:seed": "deno run -A seed.ts test.db",
+		// test.db로부터 타입스크립트 타입을 생성합니다.
 		"db:gen-types": "cd gen_types && npm run gen -- --url='../test.db'",
+		// 더미값이 채워진 test.db를 생성하고 타입을 생성합니다.
 		"db:init": "deno task db:seed && deno task db:gen-types"
 	},
 	"fmt": {
