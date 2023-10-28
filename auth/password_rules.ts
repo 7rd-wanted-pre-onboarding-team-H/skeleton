@@ -29,3 +29,4 @@ export const passwordSchema = z.string()
 	.refine((x) => diversity(x).length >= minDiversity, {
 		message: `문자, 숫자, 특수문자 중 ${minDiversity}가지 이상을 포함해야 합니다.`,
 	})
+	.openapi({ example: "password123!" })
