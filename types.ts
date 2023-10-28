@@ -9,6 +9,13 @@ export interface Hashtag {
 	id: Generated<number>
 }
 
+export interface Otp {
+	code: string
+	expires_at: string
+	id: Generated<number>
+	user_id: number
+}
+
 export interface Posting {
 	content: string
 	content_id: string
@@ -39,6 +46,7 @@ export interface User {
 
 export interface DB {
 	hashtag: Hashtag
+	otp: Otp
 	posting: Posting
 	posting_to_hashtag: PostingToHashtag
 	user: User

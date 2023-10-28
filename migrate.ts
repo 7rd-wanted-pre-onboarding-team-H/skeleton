@@ -17,6 +17,7 @@ export const tables = {
 	hashtag: "hashtag",
 	posting: "posting",
 	postingToHashtag: "posting_to_hashtag",
+	otp: "otp",
 } as const
 
 export const upUser = (db: Kysely<unknown>) =>
@@ -53,6 +54,15 @@ export const upPosting = (db: Kysely<unknown>) =>
 		.addColumn("user_id", "integer", (col) =>
 			col.references(`${tables.user}.id`).notNull().onDelete("cascade"))
 
+export const upOtp = (db: Kysely<unknown>) =>
+	db.schema
+		.createTable(tables.otp)
+		.addColumn(...id)
+		.addColumn(...text("code"))
+		.addColumn("expires_at", "text", (col) => col.notNull())
+		.addColumn("user_id", "integer", (col) =>
+			col.references(`${tables.user}.id`).notNull().onDelete("cascade"))
+
 export const upPostingHashTag = (db: Kysely<unknown>) =>
 	db.schema
 		.createTable(tables.postingToHashtag)
@@ -60,13 +70,12 @@ export const upPostingHashTag = (db: Kysely<unknown>) =>
 		.addColumn("hashtag_id", "integer", (col) => col.references(`${tables.hashtag}.id`).notNull())
 		.addPrimaryKeyConstraint("primary_key", ["posting_id", "hashtag_id"])
 
-export const ups = [upUser, upHashTag, upPosting, upPostingHashTag]
-
 export const up = async (db: Kysely<unknown>) => {
 	await upUser(db).execute()
 	await upHashTag(db).execute()
 	await upPosting(db).execute()
 	await upPostingHashTag(db).execute()
+	await upOtp(db).execute()
 }
 
 export const down = async (db: Kysely<unknown>) => {
@@ -74,6 +83,7 @@ export const down = async (db: Kysely<unknown>) => {
 	await db.schema.dropTable(tables.posting).execute()
 	await db.schema.dropTable(tables.hashtag).execute()
 	await db.schema.dropTable(tables.user).execute()
+	await db.schema.dropTable(tables.otp).execute()
 }
 
 if (import.meta.main) {

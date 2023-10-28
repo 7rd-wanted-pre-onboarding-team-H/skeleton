@@ -6,6 +6,13 @@ export const hashtagSchema = z.object({
 	id: z.number(),
 })
 
+export const otpSchema = z.object({
+    code: z.string(),
+    expires_at: z.string(),
+    id: z.number(),
+    user_id: z.number(),
+})
+
 export const postingSchema = z.object({
 	content: z.string(),
 	content_id: z.string(),
