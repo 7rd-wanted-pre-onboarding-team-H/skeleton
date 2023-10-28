@@ -6,6 +6,7 @@ import { helloController } from "./hello/mod.ts"
 import { postingController } from "./posting/mod.ts"
 import { likesController } from "./likes/mod.ts"
 import { kyselyFrom } from "./kysely_from.ts"
+import { shareController } from "./share/share_controller.ts"
 
 const db = kyselyFrom(Deno.args[0] ?? "test.db")
 
@@ -14,6 +15,7 @@ const app = new OpenAPIHono()
 	.route("", helloController())
 	.route("", postingController(db))
 	.route("", likesController(db))
+	.route("", shareController(db))
 
 serveOpenapi(app as OpenAPIHono)
 
