@@ -60,8 +60,12 @@ export const upPostingHashTag = (db: Kysely<unknown>) =>
 
 export const ups = [upUser, upHashTag, upPosting, upPostingHashTag]
 
-export const up = async (db: Kysely<unknown>) =>
-	await Promise.all(ups.map((up) => up(db).execute()))
+export const up = async (db: Kysely<unknown>) => {
+	await upUser(db).execute()
+	await upHashTag(db).execute()
+	await upPosting(db).execute()
+	await upPostingHashTag(db).execute()
+}
 
 export const down = async (db: Kysely<unknown>) => {
 	await db.schema.dropTable(tables.postingToHashtag).execute()
