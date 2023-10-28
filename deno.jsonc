@@ -2,7 +2,8 @@
 	"tasks": {
 		"dev": "deno run -A --watch main.ts",
 		"prod": "deno run --allow-read --allow-write --allow-net=0.0.0.0:3000 main.ts",
-		"test": "deno test -A --watch --no-check",
+		"test:no-check": "deno task test --no-check",
+		"test": "deno test -A --parallel --shuffle --watch",
 
 		// test.db의 DB 스키마를 초기화합니다.
 		"db:migrate": "deno run -A migrate.ts test.db",
