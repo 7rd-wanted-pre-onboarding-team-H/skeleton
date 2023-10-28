@@ -69,11 +69,15 @@ export const down = async (db: Kysely<unknown>) => {
 }
 
 if (import.meta.main) {
-	const sqlite = new Database("test.db")
+	const sqlite = new Database(Deno.args[0] ?? "test.db")
 	const db = new Kysely<unknown>({
 		dialect: new DenoSqliteDialect({ database: sqlite }),
 	})
 
-	await down(db)
+	try {
+		await down(db)
+	} catch (e) {
+		void e
+	}
 	await up(db)
 }
