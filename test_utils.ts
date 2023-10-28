@@ -23,5 +23,5 @@ export const tempAppFrom = async <const T extends OpenAPIHono>(withDB: (db: Kyse
 	const db = await tempKysely()
 
 	const app = withDB(db)
-	return { app, client: testClient(app) }
+	return { db, app, client: testClient(app) }
 }
