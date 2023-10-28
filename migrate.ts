@@ -21,6 +21,7 @@ export const upUser = (db: Kysely<unknown>) =>
 	db.schema
 		.createTable(tables.user)
 		.addColumn(...id)
+		.addColumn(...text("name"))
 		.addColumn(...text("email"))
 		.addColumn(...text("password"))
 		.addColumn(...timestamp("created_at"))

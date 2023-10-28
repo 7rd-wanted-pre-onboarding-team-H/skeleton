@@ -33,6 +33,7 @@ export interface User {
 	email: string
 	id: Generated<number>
 	password: string
+	name: string
 }
 
 export interface DB {
