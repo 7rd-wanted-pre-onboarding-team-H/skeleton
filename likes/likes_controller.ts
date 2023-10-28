@@ -4,6 +4,8 @@ import { OpenAPIHono } from "hono_zod_openapi"
 import { likesRoute } from "./likes_routes.ts"
 import { getPostLikes, updateLikes } from "./likes_data.ts"
 
+import endpoints from "../endpoint.json" with { type: "json" }
+
 export const likesController = (db: Kysely<DB>) =>
 	new OpenAPIHono().openapi(likesRoute, async (c) => {
 		try {
@@ -12,11 +14,8 @@ export const likesController = (db: Kysely<DB>) =>
 			// getPostlikes 함수로 좋아요 정보 가져오기
 			const likes = await getPostLikes(db, id)
 
-			const file = await Deno.readTextFile("./endpoint.json")
-			const json = JSON.parse(file)
-
 			if (likes) {
-				const endpoint = json[likes?.type]
+				const endpoint = endpoints[likes.type]
 				const url = `${endpoint}${id}`
 
 				const response = await fetch(url, { method: "POST" })
