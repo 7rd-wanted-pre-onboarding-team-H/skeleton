@@ -1,7 +1,7 @@
 {
-  "facebook": "https://www.facebook.com/share",
-  "twitter": "https://www.twitter.com/share",
-  "instagram": "https://www.instagram.com/share",
-  "threads": "https://www.threads.net/share",
-  "_comment": "likes 쪽 url json과 합쳐서 리팩토링 필요 facebook.likes or facebook.share 같은 형태로 사용될 수 있으면 좋을듯"
+	"facebook": "https://www.facebook.com/share",
+	"twitter": "https://www.twitter.com/share",
+	"instagram": "https://www.instagram.com/share",
+	"threads": "https://www.threads.net/share",
+	"_comment": "likes 쪽 url json과 합쳐서 리팩토링 필요 facebook.likes or facebook.share 같은 형태로 사용될 수 있으면 좋을듯"
 }

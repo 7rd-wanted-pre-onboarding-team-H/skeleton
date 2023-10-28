@@ -11,8 +11,8 @@ Deno.test(`put /postings/share/{id}`, async (t) => {
 		assertEquals(res.status, 404)
 	})
 	await t.step("존재하는 글 요청", async () => {
-    const { share_count } = await db.selectFrom("posting").select("share_count").where("id", "=", 1)
-      .executeTakeFirstOrThrow()
+		const { share_count } = await db.selectFrom("posting").select("share_count").where("id", "=", 1)
+			.executeTakeFirstOrThrow()
 
 		const res = await client.postings.share[":id"].$put({ param: { id: "1" } })
 		const json = await res.json()

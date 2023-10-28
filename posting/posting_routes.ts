@@ -57,7 +57,7 @@ export const postingListRoute = createRoute({
 			searchBy: z.string().default("title,content"),
 			search: z.string().default(""),
 			pageCount: z.number().default(10),
-			page: z.number().default(0)
+			page: z.number().default(0),
 		}),
 	},
 	responses: {
@@ -74,8 +74,8 @@ export const postingListRoute = createRoute({
 					share_count: 4,
 					updated_at: "2023-02-11T11:58:16.080Z",
 					created_at: "2023-01-28T18:05:35.518Z",
-					hashtags: ["h1", "h2", "h3"]
-				},]
+					hashtags: ["h1", "h2", "h3"],
+				}],
 			})),
 		},
 		404: {
@@ -102,9 +102,11 @@ export const postingShareRoute = createRoute({
 	responses: {
 		200: {
 			description: "공유 성공",
-			...openApiJson(z.object().openapi({
-				example: { share_count: "1" }
-			})),
+			...openApiJson(
+				z.object().openapi({
+					example: { share_count: "1" },
+				}),
+			),
 		},
 		404: {
 			description: "해당 게시물이 존재하지 않습니다.",

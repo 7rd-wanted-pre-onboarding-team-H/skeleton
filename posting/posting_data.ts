@@ -15,7 +15,7 @@ export const updateHashtag = (db: Kysely<DB>, id: number) =>
 		.where("hashtag.id", "=", id)
 
 export const getPostingList = async (db: Kysely<DB>, query) => {
-	const { 
+	const {
 		hashtag,
 		type,
 		orderBy,
@@ -23,8 +23,8 @@ export const getPostingList = async (db: Kysely<DB>, query) => {
 		searchBy,
 		search,
 		pageCount,
-		pageOffset
-	 } = query;
+		pageOffset,
+	} = query
 
 	let sqlQuery = db
 		.selectFrom("posting as p")
@@ -53,19 +53,19 @@ export const getPostingList = async (db: Kysely<DB>, query) => {
 		.groupBy("p.id")
 		.orderBy(orderBy, sort)
 
-		if (type != '') {
-			sqlQuery = sqlQuery.where("p.type", "=", type);
-		}
+	if (type != "") {
+		sqlQuery = sqlQuery.where("p.type", "=", type)
+	}
 
-		if (searchBy.split(',').length > 1) {
-			sqlQuery = sqlQuery.where(({ eb, ref }) =>
-				eb(sql`(${ref("p.title")} || ${ref("p.content")})`, "like", `%${search}%`)
-			)
-		} else {
-			sqlQuery = sqlQuery.where(`p.${searchBy}`, "like", `%${search}%`);
-		}
+	if (searchBy.split(",").length > 1) {
+		sqlQuery = sqlQuery.where(({ eb, ref }) =>
+			eb(sql`(${ref("p.title")} || ${ref("p.content")})`, "like", `%${search}%`)
+		)
+	} else {
+		sqlQuery = sqlQuery.where(`p.${searchBy}`, "like", `%${search}%`)
+	}
 
-		const postingList = await sqlQuery.execute();
+	const postingList = await sqlQuery.execute()
 
 	return postingList
 }
