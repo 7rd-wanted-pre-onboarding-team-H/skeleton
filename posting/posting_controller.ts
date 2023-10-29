@@ -9,14 +9,13 @@ export const postingController = (db: Kysely<DB>) =>
 	new OpenAPIHono().openapi(postingRoute, async (c) => {
 		const { id } = c.req.valid("param")
 		const posting = await getSinglePosting(db, id)
-		if(posting){
+		if (posting) {
 			const _viewCount = posting.view_count + 1
 			await updateViewCount(db, id, _viewCount)
-			return c.jsonT(posting) 
-		}else{
+			return c.jsonT(posting)
+		} else {
 			return c.jsonT({ error: "Not Found" }, 404)
 		}
-		
 	})
 
 export const postingListController = (db: Kysely<DB>) =>
