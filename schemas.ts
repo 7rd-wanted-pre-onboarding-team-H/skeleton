@@ -52,3 +52,13 @@ export const dbSchema = z.object({
 	posting_to_hashtag: postingToHashtagSchema,
 	user: userSchema,
 })
+
+export const summationSchema = z.object({
+	data: z.array(z.object({
+		day: z.string(),
+		postings: z.number(),
+		views: z.number(),
+		likes: z.number(),
+		shares: z.number(),
+	})),
+})

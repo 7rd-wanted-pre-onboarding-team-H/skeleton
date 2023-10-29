@@ -6,6 +6,7 @@
       "npm:@asteasolutions/zod-to-openapi@5.5.0": "npm:@asteasolutions/zod-to-openapi@5.5.0_zod@3.22.4",
       "npm:@faker-js/faker": "npm:@faker-js/faker@8.2.0",
       "npm:@hono/zod-openapi": "npm:@hono/zod-openapi@0.8.0_hono@3.8.3_zod@3.22.4",
+      "npm:dayjs@1.11.10": "npm:dayjs@1.11.10",
       "npm:hono": "npm:hono@3.8.3",
       "npm:kysely@^0.26.3": "npm:kysely@0.26.3",
       "npm:ts-pattern@5.0.5": "npm:ts-pattern@5.0.5",
@@ -39,6 +40,10 @@
           "zod": "zod@3.22.4"
         }
       },
+      "dayjs@1.11.10": {
+        "integrity": "sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==",
+        "dependencies": {}
+      },
       "hono@3.8.3": {
         "integrity": "sha512-NLJgUCKKMvijBy+V+U1FQTsNwHk2bD1KGlWJA9+qaCNWgx5St9bhfQwxrpcTGvG2Gi2naemTWCzBavDNXOqO6Q==",
         "dependencies": {}
@@ -71,8 +76,10 @@
     "https://deno.land/std@0.204.0/assert/_constants.ts": "8a9da298c26750b28b326b297316cdde860bc237533b07e1337c021379e6b2a9",
     "https://deno.land/std@0.204.0/assert/_diff.ts": "58e1461cc61d8eb1eacbf2a010932bf6a05b79344b02ca38095f9b805795dc48",
     "https://deno.land/std@0.204.0/assert/_format.ts": "a69126e8a469009adf4cf2a50af889aca364c349797e63174884a52ff75cf4c7",
+    "https://deno.land/std@0.204.0/assert/assert.ts": "9a97dad6d98c238938e7540736b826440ad8c1c1e54430ca4c4e623e585607ee",
     "https://deno.land/std@0.204.0/assert/assert_equals.ts": "d8ec8a22447fbaf2fc9d7c3ed2e66790fdb74beae3e482855d75782218d68227",
     "https://deno.land/std@0.204.0/assert/assert_is_error.ts": "c21113094a51a296ffaf036767d616a78a2ae5f9f7bbd464cd0197476498b94b",
+    "https://deno.land/std@0.204.0/assert/assert_match.ts": "c4083f80600bc190309903c95e397a7c9257ff8b5ae5c7ef91e834704e672e9b",
     "https://deno.land/std@0.204.0/assert/assert_object_match.ts": "d8fc2867cfd92eeacf9cea621e10336b666de1874a6767b5ec48988838370b54",
     "https://deno.land/std@0.204.0/assert/assert_throws.ts": "63784e951475cb7bdfd59878cd25a0931e18f6dc32a6077c454b2cd94f4f4bcd",
     "https://deno.land/std@0.204.0/assert/assertion_error.ts": "4d0bde9b374dfbcbe8ac23f54f567b77024fb67dbb1906a852d67fe050d42f56",

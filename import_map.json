@@ -8,6 +8,7 @@
 		"hono": "npm:hono",
 		"hono/": "npm:/hono/",
 		"zod": "npm:zod",
-		"hono_zod_openapi": "npm:@hono/zod-openapi"
+		"hono_zod_openapi": "npm:@hono/zod-openapi",
+		"dayjs": "npm:dayjs@1.11.10"
 	}
 }

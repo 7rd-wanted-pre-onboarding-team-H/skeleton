@@ -6,6 +6,7 @@ import { helloController } from "./hello/mod.ts"
 import { postingController, postingListController, postingShareController } from "./posting/mod.ts"
 import { likesController } from "./likes/mod.ts"
 import { signupController } from "./auth/mod.ts"
+import { summationController } from "./summation/mod.ts"
 import { kyselyFrom } from "./kysely_from.ts"
 import { ParseJSONResultsPlugin } from "kysely"
 
@@ -19,6 +20,7 @@ const app = new OpenAPIHono()
 	.route("", signupController(db))
 	.route("", helloController())
 	.route("", likesController(db))
+	.route("", summationController(db))
 	.route("", postingController(db))
 	.route("", postingListController(db))
 	.route("", postingShareController(db))
