@@ -39,14 +39,16 @@ export const postingShareController = (db: Kysely<DB>) =>
 			const response = await fetch(url, { method: "POST" })
 			await response.body?.cancel()
 
+			const updatedShareCount = posting.share_count + 1
+
 			if (response.status === 200) {
-				await updateShare(db, id, posting.share_count + 1)
+				await updateShare(db, id, updatedShareCount)
 			} else {
 				// WARN: 추후 키 설정 이후에 정상동작(throw error)
-				await updateShare(db, id, posting.share_count + 1)
+				await updateShare(db, id, updatedShareCount)
 			}
 
-			return c.jsonT({ share_count: posting.share_count + 1 })
+			return c.jsonT({ share_count: updatedShareCount })
 		} else {
 			return c.jsonT({ error: "게시물이 없습니다" }, 404)
 		}

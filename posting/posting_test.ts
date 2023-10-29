@@ -29,3 +29,5 @@ Deno.test(`GET /postings/detail/{id}`, async (t) => {
 		])
 	})
 })
+
+// TODO: postingListController, postingShareController 테스트 코드 작성

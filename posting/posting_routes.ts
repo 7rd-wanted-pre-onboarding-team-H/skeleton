@@ -119,8 +119,8 @@ export const postingShareRoute = createRoute({
 		200: {
 			description: "공유 성공",
 			...openApiJson(
-				z.object().openapi({
-					example: { share_count: "1" },
+				z.object({ share_count: z.number().int() }).openapi({
+					example: { share_count: 1 },
 				}),
 			),
 		},
