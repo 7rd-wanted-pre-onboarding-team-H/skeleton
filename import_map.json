@@ -1,13 +1,14 @@
 {
 	"imports": {
 		"sqlite": "https://deno.land/x/sqlite@v3.8/mod.ts",
-		"kysely": "npm:kysely@^0.26.3",
-		"kysely/": "npm:/kysely@^0.26.3/",
+		"kysely": "npm:kysely@0.26.3",
+		"kysely/": "npm:/kysely@0.26.3/",
 		"kysely_sqlite": "https://gitlab.com/scarf005/kysely-deno-sqlite/-/raw/d3c7d40fa716d50a9499b3f4e67a8f7e9d819844/mod.ts",
 		"faker": "npm:@faker-js/faker",
-		"hono": "npm:hono",
-		"hono/": "npm:/hono/",
-		"zod": "npm:zod",
-		"hono_zod_openapi": "npm:@hono/zod-openapi"
+		"hono": "npm:hono@3.8.3",
+		"hono/": "npm:/hono@3.8.3/",
+		"zod": "npm:zod@3.22.4",
+		"hono_zod_openapi": "npm:@hono/zod-openapi@0.8.0",
+		"dayjs": "npm:dayjs@1.11.10"
 	}
 }

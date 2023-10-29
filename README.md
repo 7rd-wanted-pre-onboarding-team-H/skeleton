@@ -2,7 +2,7 @@
 
 <header align="center">
 
-![TypeScript][TypeScript] ![Deno][Deno] ![Hono][Hono] ![SQLite][SQLite] ![Swagger][Swagger]
+![TypeScript][ts-badge] ![Deno][deno-badge] ![Hono][hono-badge] ![SQLite][sqlite-badge] ![Swagger][swagger-badge]
 
 </header>
 
@@ -34,15 +34,13 @@ deno task db:seed
 deno task dev
 ```
 
-<http://localhost:3000/> 에서 각 엔드포인트에 접근할 수 있습니다.
-
 <video controls>
   <source src="https://github.com/7rd-wanted-pre-onboarding-team-H/w1-social-feed/assets/54838975/ada43f88-38d1-4da2-a9ce-b98eec8eaca3"
   type="video/mp4" />
   <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/54838975/278273835-b589f9c2-975c-456f-a9dd-9715242166bf.png" alt="Fallback Image">
 </video>
 
-<http://localhost:3000/openapi> 에서 Swagger UI를 통해 API 문서를 확인하고 실행할 수 있습니다.
+<http://localhost:8000/> 에서 Swagger UI를 통해 API 문서를 확인하고 실행할 수 있습니다.
 
 [watch-mode]: https://docs.deno.com/runtime/manual/getting_started/command_line_interface#watch-mode
 
@@ -52,8 +50,8 @@ deno task dev
 deno task prod # 또는 deno run -A main.ts
 ```
 
-[Swagger]: https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white
-[SQLite]: https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white
-[Deno]: https://img.shields.io/badge/deno-000000?style=for-the-badge&logo=deno&logoColor=white
-[TypeScript]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
-[Hono]: https://img.shields.io/badge/hono-f0ffff.svg?style=for-the-badge&logo=data:image/svg%2bxml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjUwMHB4IiBoZWlnaHQ9IjUwMHB4IiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CjxnPjxwYXRoIHN0eWxlPSJvcGFjaXR5OjAuOTkzIiBmaWxsPSIjZmY1YjExIiBkPSJNIDI1Ny41LDAuNSBDIDI1OC44MjIsMC4zMzAwMzQgMjU5Ljk4OSwwLjY2MzM2OCAyNjEsMS41QyAyOTguMTkzLDQ2Ljg5MzYgMzMzLjE5Myw5My44OTM2IDM2NiwxNDIuNUMgMzkwLjI4OSwxNzkuMDY5IDQxMC45NTUsMjE3LjczNSA0MjgsMjU4LjVDIDQ1NS4yMjEsMzMxLjEwNCA0NDEuMDU0LDM5NC4yNzEgMzg1LjUsNDQ4QyAzMzYuODkyLDQ4OS4wODIgMjgwLjg5Miw1MDUuMDgyIDIxNy41LDQ5NkMgMTQxLjcyNyw0ODAuNTUxIDkwLjIyNjUsNDM2LjcxOCA2MywzNjQuNUMgNTUuOTA4MSwzNDAuOTg5IDUzLjU3NDgsMzE2Ljk4OSA1NiwyOTIuNUMgNjAuMDM4NCwyNTAuMzQ3IDcwLjAzODQsMjA5LjY4IDg2LDE3MC41QyA5Mi42NTA5LDE1NC41MTQgMTAxLjMxOCwxMzkuODQ4IDExMiwxMjYuNUMgMTIwLjcxNSwxMzYuODggMTI5LjA0OCwxNDcuNTQ3IDEzNywxNTguNUMgMTQwLjY4MiwxNjIuMzQ5IDE0NC41MTUsMTY2LjAxNiAxNDguNSwxNjkuNUMgMTc4LjkxNywxMDkuMTM2IDIxNS4yNTEsNTIuODAyOCAyNTcuNSwwLjUgWiIvPjwvZz4KPGc+PHBhdGggc3R5bGU9Im9wYWNpdHk6MSIgZmlsbD0iI2ZmOTc1OCIgZD0iTSAyNTAuNSw4MS41IEMgMjg3LjE5MywxMjQuMDYgMzIwLjM2LDE2OS4zOTMgMzUwLDIxNy41QyAzNTkuMjkzLDIzMy40MTggMzY2Ljk1OSwyNTAuMDg1IDM3MywyNjcuNUMgMzg1LjU4NCwzMTcuMDA4IDM3Mi4wODQsMzU3Ljg0MiAzMzIuNSwzOTBDIDI5NC4yMTYsNDE2LjkzOSAyNTIuMjE2LDQyNC45MzkgMjA2LjUsNDE0QyAxNTcuMjAxLDM5OC43MDIgMTI4LjcwMSwzNjUuNTM1IDEyMSwzMTQuNUMgMTE5LjEzMSwyOTguNDA5IDEyMC43OTgsMjgyLjc0MiAxMjYsMjY3LjVDIDEzMy40MTgsMjQ4LjY2MyAxNDIuNDE4LDIzMC42NjMgMTUzLDIxMy41QyAxNjMsMTk4LjgzMyAxNzMsMTg0LjE2NyAxODMsMTY5LjVDIDIwNS43MTYsMTQwLjI5IDIyOC4yMTYsMTEwLjk1NyAyNTAuNSw4MS41IFoiLz48L2c+Cjwvc3ZnPgo=
+[swagger-badge]: https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white
+[sqlite-badge]: https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white
+[deno-badge]: https://img.shields.io/badge/deno-000000?style=for-the-badge&logo=deno&logoColor=white
+[ts-badge]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
+[hono-badge]: https://img.shields.io/badge/hono-f0ffff.svg?style=for-the-badge&logo=data:image/svg%2bxml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgd2lkdGg9IjUwMHB4IiBoZWlnaHQ9IjUwMHB4IiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CjxnPjxwYXRoIHN0eWxlPSJvcGFjaXR5OjAuOTkzIiBmaWxsPSIjZmY1YjExIiBkPSJNIDI1Ny41LDAuNSBDIDI1OC44MjIsMC4zMzAwMzQgMjU5Ljk4OSwwLjY2MzM2OCAyNjEsMS41QyAyOTguMTkzLDQ2Ljg5MzYgMzMzLjE5Myw5My44OTM2IDM2NiwxNDIuNUMgMzkwLjI4OSwxNzkuMDY5IDQxMC45NTUsMjE3LjczNSA0MjgsMjU4LjVDIDQ1NS4yMjEsMzMxLjEwNCA0NDEuMDU0LDM5NC4yNzEgMzg1LjUsNDQ4QyAzMzYuODkyLDQ4OS4wODIgMjgwLjg5Miw1MDUuMDgyIDIxNy41LDQ5NkMgMTQxLjcyNyw0ODAuNTUxIDkwLjIyNjUsNDM2LjcxOCA2MywzNjQuNUMgNTUuOTA4MSwzNDAuOTg5IDUzLjU3NDgsMzE2Ljk4OSA1NiwyOTIuNUMgNjAuMDM4NCwyNTAuMzQ3IDcwLjAzODQsMjA5LjY4IDg2LDE3MC41QyA5Mi42NTA5LDE1NC41MTQgMTAxLjMxOCwxMzkuODQ4IDExMiwxMjYuNUMgMTIwLjcxNSwxMzYuODggMTI5LjA0OCwxNDcuNTQ3IDEzNywxNTguNUMgMTQwLjY4MiwxNjIuMzQ5IDE0NC41MTUsMTY2LjAxNiAxNDguNSwxNjkuNUMgMTc4LjkxNywxMDkuMTM2IDIxNS4yNTEsNTIuODAyOCAyNTcuNSwwLjUgWiIvPjwvZz4KPGc+PHBhdGggc3R5bGU9Im9wYWNpdHk6MSIgZmlsbD0iI2ZmOTc1OCIgZD0iTSAyNTAuNSw4MS41IEMgMjg3LjE5MywxMjQuMDYgMzIwLjM2LDE2OS4zOTMgMzUwLDIxNy41QyAzNTkuMjkzLDIzMy40MTggMzY2Ljk1OSwyNTAuMDg1IDM3MywyNjcuNUMgMzg1LjU4NCwzMTcuMDA4IDM3Mi4wODQsMzU3Ljg0MiAzMzIuNSwzOTBDIDI5NC4yMTYsNDE2LjkzOSAyNTIuMjE2LDQyNC45MzkgMjA2LjUsNDE0QyAxNTcuMjAxLDM5OC43MDIgMTI4LjcwMSwzNjUuNTM1IDEyMSwzMTQuNUMgMTE5LjEzMSwyOTguNDA5IDEyMC43OTgsMjgyLjc0MiAxMjYsMjY3LjVDIDEzMy40MTgsMjQ4LjY2MyAxNDIuNDE4LDIzMC42NjMgMTUzLDIxMy41QyAxNjMsMTk4LjgzMyAxNzMsMTg0LjE2NyAxODMsMTY5LjVDIDIwNS43MTYsMTQwLjI5IDIyOC4yMTYsMTEwLjk1NyAyNTAuNSw4MS41IFoiLz48L2c+Cjwvc3ZnPgo=

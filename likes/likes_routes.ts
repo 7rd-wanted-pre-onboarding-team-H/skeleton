@@ -19,9 +19,8 @@ export const likesRoute = createRoute({
 		200: {
 			description: "좋아요 성공",
 			...openApiJson(z.object({
-				message: z.string().openapi({
-					example: "좋아요 : 2",
-				}),
+				like_count: z.number().openapi({ example: 3 }),
+				message: z.string().openapi({ example: "좋아요 진짜 성공" }),
 			})),
 		},
 		404: {

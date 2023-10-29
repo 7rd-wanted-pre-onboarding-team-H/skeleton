@@ -137,7 +137,7 @@ const app = new OpenAPIHono()
 // Swagger UI를 사용합니다. (경로: "/openapi")
 serveOpenapi(app as OpenAPIHono)
 
-Deno.serve({ port: 3000 }, app.fetch)
+Deno.serve(app.fetch)
 
 app.showRoutes()
 ```
@@ -212,10 +212,10 @@ db
 
 ```sh
 # 타입 검사를 포함해 각 엔드포인트를 테스트합니다.
-deno test -A
+deno task test
 
 # 타입 검사를 생략하고 파일에 변화가 생길 때마다 다시 테스트합니다.
-deno task test
+deno task test:no-check
 ```
 
 ### 테스트 작성

@@ -1,4 +1,4 @@
-import { Kysely } from "kysely"
+import { Kysely, KyselyConfig } from "kysely"
 import { DB } from "./types.ts"
 import { up } from "./migrate.ts"
 import { seed } from "./seed.ts"
@@ -6,10 +6,7 @@ import { OpenAPIHono } from "hono_zod_openapi"
 import { testClient } from "hono/testing"
 import { kyselyFrom } from "./kysely_from.ts"
 
-/** in-memory DB에 연결된 Kysely 인스턴스를 반환합니다. */
-export const tempKysely = async () => {
-	const db = kyselyFrom(":memory:")
-
+export const seeded = async (db: Kysely<DB>) => {
 	await up(db as Kysely<unknown>)
 	await seed(db)
 
@@ -19,9 +16,12 @@ export const tempKysely = async () => {
 /**
  * 테스트 파일마다 사용 가능한 독립된 앱을 생성합니다.
  */
-export const tempAppFrom = async <const T extends OpenAPIHono>(withDB: (db: Kysely<DB>) => T) => {
-	const db = await tempKysely()
+export const tempAppFrom = async <const T extends OpenAPIHono>(
+	withDB: (db: Kysely<DB>) => T,
+	option?: Omit<KyselyConfig, "dialect">,
+) => {
+	const db = await seeded(kyselyFrom(":memory:", option))
 
 	const app = withDB(db)
-	return { app, client: testClient(app) }
+	return { db, app, client: testClient(app) }
 }

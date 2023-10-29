@@ -13,4 +13,4 @@ export const updateLikes = (db: Kysely<DB>, id: number, _like: number) =>
 		.updateTable("posting")
 		.set({ like_count: _like })
 		.where("posting.id", "=", id)
-		.execute()
+		.executeTakeFirst()

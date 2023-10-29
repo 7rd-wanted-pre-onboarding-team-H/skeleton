@@ -11,6 +11,7 @@ export const seedUser = async (db: Kysely<DB>) => {
 		email: faker.internet.email(),
 		password: faker.internet.password(),
 		created_at: faker.date.recent({ days: 30, refDate: new Date("2023-01-01") }).toISOString(),
+		is_validated: Number(faker.datatype.boolean({ probability: 0.75 })),
 	}))
 
 	await db.insertInto("user").values(users).execute()
@@ -18,13 +19,11 @@ export const seedUser = async (db: Kysely<DB>) => {
 
 export const seedHashTag = async (db: Kysely<DB>) => {
 	const hashtags = Array.from(
-		{ length: 10 },
-		() => ({
-			content: faker.helpers.arrayElement([faker.hacker.adjective(), faker.hacker.noun()]),
-		}),
+		{ length: 100 },
+		() => faker.helpers.arrayElement([faker.hacker.adjective(), faker.hacker.noun()]),
 	)
-
-	await db.insertInto("hashtag").values(hashtags).execute()
+	const entries = [...new Set(hashtags)].slice(0, 10).map((x) => ({ content: x }))
+	await db.insertInto("hashtag").values(entries).execute()
 }
 
 export const seedPosting = async (db: Kysely<DB>) => {
@@ -34,7 +33,7 @@ export const seedPosting = async (db: Kysely<DB>) => {
 		{ length: 10 },
 		(_, i) => ({
 			id: i + 1,
-			type: faker.helpers.arrayElement(["facebook", "twitter", "instagram", "threads"]),
+			type: faker.helpers.arrayElement(["facebook", "twitter", "instagram", "threads"] as const),
 			title: faker.lorem.sentence({ min: 1, max: 3 }),
 			content: faker.lorem.paragraph(1),
 			content_id: faker.string.nanoid(),
