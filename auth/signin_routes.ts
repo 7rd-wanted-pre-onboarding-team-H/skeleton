@@ -1,6 +1,4 @@
 import { createRoute, z } from "hono_zod_openapi"
-import { openApiJson } from "../utils.ts"
-import { postingSchema } from "../schemas.ts"
 
 export const signInUser = createRoute({
 	method: "post",
