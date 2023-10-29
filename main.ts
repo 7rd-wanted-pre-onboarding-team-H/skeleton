@@ -9,11 +9,14 @@ import { signupController } from "./auth/mod.ts"
 import { summationController } from "./summation/mod.ts"
 import { kyselyFrom } from "./kysely_from.ts"
 import { ParseJSONResultsPlugin } from "kysely"
+import { seeded } from "./test_utils.ts"
 
-const db = kyselyFrom(
-	Deno.args[0] ?? "test.db",
-	{ plugins: [new ParseJSONResultsPlugin()] },
-)
+const dbPath = Deno.env.get("DB_PATH") ?? Deno.args[0] ?? "test.db"
+
+console.log("DB_PATH", dbPath)
+
+const rawDb = kyselyFrom(dbPath, { plugins: [new ParseJSONResultsPlugin()] })
+const db = dbPath === ":memory:" ? await seeded(rawDb) : rawDb
 
 const app = new OpenAPIHono()
 	.use("*", logger(), prettyJSON())
