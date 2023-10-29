@@ -64,7 +64,7 @@ export const postingListRoute = createRoute({
 		200: {
 			description: "성공적으로 게시물 목록 조회 완료",
 			// TODO: 수정
-			...openApiJson(postingSchema.openapi({
+			...openApiJson(z.array().openapi({
 				example: [{
 					type: "facebook",
 					title: "안녕하세요...",
