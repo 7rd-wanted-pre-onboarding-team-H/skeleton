@@ -13,13 +13,13 @@ export const getSummation = (
 		.where(({ between }) => between("posting.created_at", start, end))
 		.where("hashtag.content", "=", content)
 		.select(({ fn: { count, sum } }) => [
-			sql<string[]>`strftime(${dateFormat}, posting.created_at)`.as("day"),
-			count("posting.id").as("postings"),
-			sum("posting.view_count").as("views"),
-			sum("posting.like_count").as("likes"),
-			sum("posting.share_count").as("shares"),
+			sql<string>`strftime(${dateFormat}, posting.created_at)`.as("day"),
+			count<number>("posting.id").as("postings"),
+			sum<number>("posting.view_count").as("views"),
+			sum<number>("posting.like_count").as("likes"),
+			sum<number>("posting.share_count").as("shares"),
 		])
-		.groupBy(sql<string[]>`strftime(${dateFormat}, posting.created_at)`)
-		.orderBy(sql<string[]>`strftime(${dateFormat}, posting.created_at)`, "desc")
+		.groupBy(sql<string>`strftime(${dateFormat}, posting.created_at)`)
+		.orderBy(sql<string>`strftime(${dateFormat}, posting.created_at)`, "desc")
 		.execute()
 }

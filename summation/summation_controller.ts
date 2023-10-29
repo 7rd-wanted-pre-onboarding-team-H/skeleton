@@ -36,9 +36,9 @@ export const summationController = (db: Kysely<DB>) =>
 			return c.jsonT({ error: "잘못된 요청, 유효하지 않은 날짜 범위" }, 400)
 		}
 
-		const summationResult = await getSummation(db, summationOption)
+		const data = await getSummation(db, summationOption)
 
-		if (!summationResult.length) return c.jsonT({ error: "No content" }, 404)
+		if (!data.length) return c.jsonT({ error: "No content" }, 404)
 
-		return c.jsonT(summationResult, 200)
+		return c.jsonT({ data }, 200)
 	})
