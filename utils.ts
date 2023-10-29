@@ -1,6 +1,6 @@
 import { z } from "hono_zod_openapi"
 
-export const openApiJson = <const T extends z.AnyZodObject>(schema: T) => ({
+export const openApiJson = <const T extends z.ZodTypeAny>(schema: T) => ({
 	content: { "application/json": { schema } },
 })
 

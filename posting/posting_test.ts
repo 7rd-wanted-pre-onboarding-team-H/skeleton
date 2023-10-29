@@ -4,13 +4,13 @@ import { postingController } from "./posting_controller.ts"
 
 const { client } = await tempAppFrom(postingController)
 
-Deno.test(`GET /postings/{id}`, async (t) => {
+Deno.test(`GET /postings/detail/{id}`, async (t) => {
 	await t.step("존재하지 않는 글 요청", async () => {
-		const res = await client.postings[":id"].$get({ param: { id: "0" } })
+		const res = await client.postings.detail[":id"].$get({ param: { id: "0" } })
 		assertEquals(res.status, 404)
 	})
 	await t.step("존재하는 글 요청", async () => {
-		const res = await client.postings[":id"].$get({ param: { id: "1" } })
+		const res = await client.postings.detail[":id"].$get({ param: { id: "1" } })
 		const json = await res.json()
 
 		assertEquals(res.status, 200)
@@ -29,3 +29,5 @@ Deno.test(`GET /postings/{id}`, async (t) => {
 		])
 	})
 })
+
+// TODO: postingListController, postingShareController 테스트 코드 작성
