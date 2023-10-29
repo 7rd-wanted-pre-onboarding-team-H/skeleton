@@ -63,3 +63,9 @@ deno task dev
 ```sh
 deno task prod # 또는 deno run -A main.ts
 ```
+
+## 개발 가이드
+
+- [OpenAPI 엔드포인트 정의법](./docs/CONTRIBUTING.md)
+- [db 쿼리 빌더 사용법](./docs/db.md) 
+- [코드 컨벤션 및 테스트 작성법](./docs/testing.md)
