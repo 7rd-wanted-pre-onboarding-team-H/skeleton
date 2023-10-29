@@ -252,3 +252,16 @@ deno fmt
 # lint
 deno lint
 ```
+
+## 배포
+
+[deno deploy](https://deno.com/deploy)를 통해 main 브랜치에 커밋될 때마다 자동으로 [swagger UI](https://wanted-w1-social-feed.deno.dev)가 배포됩니다.
+
+### PR에서 배포 확인
+
+![image](https://github.com/7rd-wanted-pre-onboarding-team-H/w1-social-feed/assets/54838975/7ffb7c39-39a7-4369-a9df-997340894a10)
+
+PR에서도 실시간으로 배포된 API와 Swagger UI를 확인할 수 있습니다.
+
+- `Deno/wanted-w1-social-feed`: 현재 커밋이 배포된 API 링크입니다.
+- `Deno/wanted-w1-social-feed/wanted-w1-social-feed--<브랜치명>.deno.dev`: PR 최신 커밋에서 배포된 API입니다.
