@@ -10,7 +10,7 @@
 		// 더미값이 채워진 test.db를 생성합니다.
 		"db:seed": "deno run -A seed.ts test.db",
 		// test.db로부터 타입스크립트 타입을 생성합니다.
-		"db:gen-types": "cd gen_types && npm run gen -- --url='../test.db'",
+		"db:gen-types": "cd gen_types && npm run gen -- --url='../test.db' && cd .. && deno fmt",
 		// 더미값이 채워진 test.db를 생성하고 타입을 생성합니다.
 		"db:init": "deno task db:seed && deno task db:gen-types"
 	},
