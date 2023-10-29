@@ -22,7 +22,7 @@
 	},
 	"importMap": "./import_map.json",
 	"compilerOptions": {
-		"exactOptionalPropertyTypes": true,
+		"exactOptionalPropertyTypes": false,
 		"noErrorTruncation": true
 	}
 }
