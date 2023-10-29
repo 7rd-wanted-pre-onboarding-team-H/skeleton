@@ -205,10 +205,7 @@ db
 
 ### 테스트 실행
 
-<video controls>
-  <source src="https://github.com/7rd-wanted-pre-onboarding-team-H/w1-social-feed/assets/54838975/0d179706-62a9-40a9-aadc-f5e1a781c608"
-  type="video/mp4" />
-</video>
+https://github.com/7rd-wanted-pre-onboarding-team-H/w1-social-feed/assets/54838975/0d179706-62a9-40a9-aadc-f5e1a781c608
 
 ```sh
 # 타입 검사를 포함해 각 엔드포인트를 테스트합니다.
