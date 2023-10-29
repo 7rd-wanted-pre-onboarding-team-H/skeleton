@@ -13,7 +13,7 @@ export const signInUser = createRoute({
 			content: {
 				"application/json": {
 					schema: z.object({
-						name: z.string().openapi({ example: "jimin"}),
+						name: z.string().openapi({ example: "jimin" }),
 						password: z.string().openapi({ example: "password123!" }),
 					}),
 				},
@@ -32,8 +32,8 @@ export const signInUser = createRoute({
 			content: {
 				"application/json": {
 					schema: z.string().openapi({ example: "로그인에 성공했습니다." }),
-				}
-			}
+				},
+			},
 		},
 		400: {
 			description: "요청이 잘못되었습니다.",
@@ -43,7 +43,7 @@ export const signInUser = createRoute({
 						error: z.string().openapi({ example: "Not Found" }),
 					}),
 				},
-			}
+			},
 		},
 		401: {
 			description: "로그인에 실패했습니다.",
@@ -53,7 +53,7 @@ export const signInUser = createRoute({
 						error: z.string().openapi({ example: "Not Found" }),
 					}),
 				},
-			}
+			},
 		},
 	},
 })
