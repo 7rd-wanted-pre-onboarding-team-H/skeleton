@@ -27,6 +27,6 @@ const app = new OpenAPIHono()
 
 serveOpenapi(app as OpenAPIHono)
 
-Deno.serve({ port: 3000 }, app.fetch)
+Deno.serve(app.fetch)
 
 app.showRoutes()

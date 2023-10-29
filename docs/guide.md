@@ -137,7 +137,7 @@ const app = new OpenAPIHono()
 // Swagger UI를 사용합니다. (경로: "/openapi")
 serveOpenapi(app as OpenAPIHono)
 
-Deno.serve({ port: 3000 }, app.fetch)
+Deno.serve(app.fetch)
 
 app.showRoutes()
 ```

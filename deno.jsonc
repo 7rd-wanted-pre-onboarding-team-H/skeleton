@@ -1,7 +1,8 @@
 {
 	"tasks": {
 		"dev": "deno run -A --watch main.ts",
-		"prod": "deno run --allow-read --allow-write --allow-net=0.0.0.0:3000 main.ts",
+		// deno deploy 환경과 동일한 권한으로 실행합니다.
+		"prod": "DB_PATH=':memory:' deno run --allow-read --allow-env --allow-net main.ts",
 		"test:no-check": "deno task test --no-check",
 		"test": "deno test -A --parallel --shuffle --watch",
 
