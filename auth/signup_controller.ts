@@ -16,6 +16,10 @@ export const signupController = (db: Kysely<DB>) =>
 			const expireDate = new Date(Date.now() + expireAge).toISOString()
 
 			return await db.transaction().execute(async (trx) => {
+				// 트랜잭션 안에서 db를 사용해서는 안됩니다.
+				// deno-lint-ignore no-unused-vars
+				const db = null as never
+
 				const existing = await trx.selectFrom("user")
 					.select(["id"])
 					.where("name", "=", name)
@@ -24,11 +28,13 @@ export const signupController = (db: Kysely<DB>) =>
 				if (existing) {
 					return c.jsonT({ error: "이미 존재하는 사용자입니다." }, 409)
 				}
+
 				const password = await bcrypt.hash(rawPassword)
-				const { insertId } = await db.insertInto("user")
+
+				const { insertId } = await trx.insertInto("user")
 					.values({ name, email, password }).executeTakeFirstOrThrow()
 
-				await db.insertInto("otp")
+				await trx.insertInto("otp")
 					.values({ user_id: Number(insertId!), code: otp, expires_at: expireDate })
 					.executeTakeFirstOrThrow()
 
@@ -39,6 +45,10 @@ export const signupController = (db: Kysely<DB>) =>
 			const { name, email, otp } = c.req.valid("json")
 
 			return await db.transaction().execute(async (trx) => {
+				// 트랜잭션 안에서 db를 사용해서는 안됩니다.
+				// deno-lint-ignore no-unused-vars
+				const db = null as never
+
 				const userQuery = await trx.selectFrom("user")
 					.select(["id", "name", "email"])
 					.where("name", "=", name)
