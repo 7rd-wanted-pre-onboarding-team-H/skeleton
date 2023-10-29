@@ -28,7 +28,7 @@ const app = new OpenAPIHono()
 	.route("", postingListController(db))
 	.route("", postingShareController(db))
 
-serveOpenapi(app as OpenAPIHono)
+serveOpenapi(app as OpenAPIHono, { pageUrl: "/", jsonUrl: "/openapi.json" })
 
 Deno.serve(app.fetch)
 
