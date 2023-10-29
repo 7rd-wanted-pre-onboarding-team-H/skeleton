@@ -5,7 +5,7 @@ import type { SummationSqlOption } from "./summation_controller.ts"
 
 export const getSummation = (
 	db: Kysely<DB>,
-	{ content, dateFormat, start, end, value }: SummationSqlOption,
+	{ content, dateFormat, start, end }: SummationSqlOption,
 ) => {
 	return db.selectFrom("posting")
 		.innerJoin("posting_to_hashtag as post2tag", "posting.id", "post2tag.posting_id")
