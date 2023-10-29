@@ -18,22 +18,13 @@ export const postingListController = (db: Kysely<DB>) =>
 		const query = c.req.valid("query")
 
 		// TODO: 유저 정보 넘겨받는 방법 (header?)에 따라 hastag default 값 정하기(계정 아이디)
-		query.hashtag = query.hashtag ? query.hashtag : ""
 
 		// 페이지 설정
-		const pageLimit = query.pageCount
-		query.pageOffset = query.page > 1 ? pageLimit * (query.page - 1) : 0
+		const pageOffset = query.page > 1 ? query.page_count * (query.page - 1) : 0
 
-		const posting = await getPostingList(db, query)
+		const posting = await getPostingList(db, { ...query, pageOffset })
 
-		// 데이터 가공(관리id 등 삭제)
-		posting.map((data) => {
-			delete data.posting_id
-			data.hashtags = JSON.parse(data.hashtags)
-
-			// TODO: 날짜 format 맞춘다면 dayjs 사용
-		})
-
+		// TODO: 날짜 format 맞춘다면 dayjs 사용
 		return posting ? c.jsonT(posting) : c.jsonT({ error: "Not Found" }, 404)
 	})
 

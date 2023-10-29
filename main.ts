@@ -7,8 +7,12 @@ import { postingController, postingListController, postingShareController } from
 import { likesController } from "./likes/mod.ts"
 import { signupController } from "./auth/mod.ts"
 import { kyselyFrom } from "./kysely_from.ts"
+import { ParseJSONResultsPlugin } from "kysely"
 
-const db = kyselyFrom(Deno.args[0] ?? "test.db")
+const db = kyselyFrom(
+	Deno.args[0] ?? "test.db",
+	{ plugins: [new ParseJSONResultsPlugin()] },
+)
 
 const app = new OpenAPIHono()
 	.use("*", logger(), prettyJSON())
