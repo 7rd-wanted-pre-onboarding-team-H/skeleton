@@ -2,15 +2,20 @@ import type { Kysely } from "kysely"
 import type { DB } from "../types.ts"
 import { OpenAPIHono } from "hono_zod_openapi"
 import { postingListRoute, postingRoute, postingShareRoute } from "./posting_routes.ts"
-import { getPostingList, getSinglePosting, updateShare } from "./posting_data.ts"
+import { getPostingList, getSinglePosting, updateShare, updateViewCount } from "./posting_data.ts"
 import typeUrl from "./typeUrl.json" with { type: "json" }
 
 export const postingController = (db: Kysely<DB>) =>
 	new OpenAPIHono().openapi(postingRoute, async (c) => {
 		const { id } = c.req.valid("param")
 		const posting = await getSinglePosting(db, id)
-
-		return posting ? c.jsonT(posting) : c.jsonT({ error: "Not Found" }, 404)
+		if (posting) {
+			const _viewCount = posting.view_count + 1
+			await updateViewCount(db, id, _viewCount)
+			return c.jsonT(posting)
+		} else {
+			return c.jsonT({ error: "Not Found" }, 404)
+		}
 	})
 
 export const postingListController = (db: Kysely<DB>) =>

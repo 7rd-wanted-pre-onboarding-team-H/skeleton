@@ -21,7 +21,7 @@
 		"lineWidth": 100,
 		"proseWrap": "never"
 	},
-    "nodeModulesDir": false,
+	"nodeModulesDir": false,
 	"importMap": "./import_map.json",
 	"compilerOptions": {
 		"exactOptionalPropertyTypes": false,
