@@ -34,15 +34,13 @@ deno task db:seed
 deno task dev
 ```
 
-<http://localhost:3000/> 에서 각 엔드포인트에 접근할 수 있습니다.
-
 <video controls>
   <source src="https://github.com/7rd-wanted-pre-onboarding-team-H/w1-social-feed/assets/54838975/ada43f88-38d1-4da2-a9ce-b98eec8eaca3"
   type="video/mp4" />
   <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/54838975/278273835-b589f9c2-975c-456f-a9dd-9715242166bf.png" alt="Fallback Image">
 </video>
 
-<http://localhost:3000/openapi> 에서 Swagger UI를 통해 API 문서를 확인하고 실행할 수 있습니다.
+<http://localhost:8000/> 에서 Swagger UI를 통해 API 문서를 확인하고 실행할 수 있습니다.
 
 [watch-mode]: https://docs.deno.com/runtime/manual/getting_started/command_line_interface#watch-mode
 
