@@ -16,6 +16,13 @@ export const updateHashtag = (db: Kysely<DB>, id: number) =>
 		.set({ content: "test" })
 		.where("hashtag.id", "=", id)
 
+export const updateViewCount = (db: Kysely<DB>, id: number, _view: number) =>
+	db
+		.updateTable("posting")
+		.set({ view_count: _view })
+		.where("posting.id", "=", id)
+		.executeTakeFirst()
+
 type Query = z.infer<(typeof postingListRoute)["request"]["query"]> & { pageOffset: number }
 
 const getAllPostings = (db: Kysely<DB>) =>
