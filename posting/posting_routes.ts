@@ -5,7 +5,7 @@ import { postingSchema } from "../schemas.ts"
 // TODO: 상세조회를 위해 남겨두었으나 필요없으면 삭제 요망
 export const postingRoute = createRoute({
 	method: "get",
-	path: "/postings/detail",
+	path: "/postings/detail/{id}",
 	tags: ["postings"],
 	summary: "게시물 하나를 조회합니다.",
 	request: {
