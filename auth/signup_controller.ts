@@ -29,7 +29,7 @@ export const signupController = (db: Kysely<DB>) =>
 					return c.jsonT({ error: "이미 존재하는 사용자입니다." }, 409)
 				}
 
-				const password = await bcrypt.hash(rawPassword)
+				const password = bcrypt.hashSync(rawPassword)
 
 				const { insertId } = await trx.insertInto("user")
 					.values({ name, email, password }).executeTakeFirstOrThrow()
