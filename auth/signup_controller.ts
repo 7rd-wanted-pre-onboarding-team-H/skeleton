@@ -41,7 +41,7 @@ export const signupController = (db: Kysely<DB>) =>
 			return await db.transaction().execute(async (trx) => {
 				const userQuery = await trx.selectFrom("user")
 					.select(["id", "name", "email"])
-                    .where("name", "=", name)
+					.where("name", "=", name)
 					.where("email", "=", email)
 					.executeTakeFirstOrThrow()
 

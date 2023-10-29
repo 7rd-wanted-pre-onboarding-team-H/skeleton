@@ -29,9 +29,8 @@ Deno.test("POST /auth/signup", async (t) => {
 	})
 })
 
-
 Deno.test("POST /auth/otp (인증 성공)", async (t) => {
-    const otp = "123456"
+	const otp = "123456"
 	const userId = 1
 	const payload = { name: "inad", ...credentials } as const
 
