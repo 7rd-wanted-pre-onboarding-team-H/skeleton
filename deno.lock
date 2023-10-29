@@ -4,6 +4,7 @@
     "specifiers": {
       "npm:@faker-js/faker": "npm:@faker-js/faker@8.2.0",
       "npm:@hono/zod-openapi": "npm:@hono/zod-openapi@0.8.0_hono@3.8.3_zod@3.22.4",
+      "npm:dayjs@1.11.10": "npm:dayjs@1.11.10",
       "npm:hono": "npm:hono@3.8.3",
       "npm:kysely@^0.26.3": "npm:kysely@0.26.3",
       "npm:ts-pattern@5.0.5": "npm:ts-pattern@5.0.5",
@@ -36,6 +37,10 @@
           "hono": "hono@3.8.3",
           "zod": "zod@3.22.4"
         }
+      },
+      "dayjs@1.11.10": {
+        "integrity": "sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==",
+        "dependencies": {}
       },
       "hono@3.8.3": {
         "integrity": "sha512-NLJgUCKKMvijBy+V+U1FQTsNwHk2bD1KGlWJA9+qaCNWgx5St9bhfQwxrpcTGvG2Gi2naemTWCzBavDNXOqO6Q==",
