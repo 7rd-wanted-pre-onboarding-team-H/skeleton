@@ -2,23 +2,43 @@ import type { Kysely } from "kysely"
 import type { DB } from "../types.ts"
 import { OpenAPIHono } from "hono_zod_openapi"
 import { summationRoute } from "./summation_routes.ts"
-import { getSummation, isVaildDate, summationSqlOption } from "./summation_data.ts"
-import type { SummationRequestQuery } from "./summation_data.ts"
+import { getSummation } from "./summation_data.ts"
+import dayjs from "dayjs"
+
+export type SummationSqlOption = {
+	content: string
+	dateFormat: string
+	start: string
+	end: string
+	value: string
+}
 
 export const summationController = (db: Kysely<DB>) =>
 	new OpenAPIHono().openapi(summationRoute, async (c) => {
-		const query: SummationRequestQuery = c.req.valid("query")
+		const query = c.req.valid("query")
 
-		if (!isVaildDate(query)) {
-			return c.jsonT({ message: "잘못된 요청, 유효하지 않은 날짜 범위" }, 400)
+		const summationOption: SummationSqlOption = {
+			content: query.content ? query.content : "userId",
+			dateFormat: query.type === "hour" ? "%Y-%m-%d %H" : "%Y-%m-%d",
+			start: query.start ? query.start : dayjs().subtract(7, "day").format("YYYY-MM-DD HH"),
+			end: query.end ? query.end : dayjs().format("YYYY-MM-DD HH"),
+			value: query.value ? query.value : "postings",
 		}
 
-		const summationOption = summationSqlOption(query)
+		const endMinusStart = dayjs(summationOption.end, "YYYY-MM-DD").diff(
+			dayjs(summationOption.start, "YYYY-MM-DD"),
+			"day",
+		)
 
-		try {
-			const summation = await getSummation(db, summationOption)
-			return c.jsonT({ message: `${summationOption.value} 통계 조회 성공`, data: summation }, 200)
-		} catch {
-			return c.jsonT({ message: "No content" }, 400)
+		if (
+			(query.type === "hour" && endMinusStart > 7) || (query.type === "date" && endMinusStart > 30)
+		) {
+			return c.jsonT({ error: "잘못된 요청, 유효하지 않은 날짜 범위" }, 400)
 		}
+
+		const summationResult = await getSummation(db, summationOption)
+
+		if (!summationResult.length) return c.jsonT({ error: "No content" }, 404)
+
+		return c.jsonT(summationResult, 200)
 	})

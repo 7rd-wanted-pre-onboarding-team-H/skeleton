@@ -9,26 +9,11 @@ export const summationRoute = createRoute({
 	summary: "해당 해시태그 게시물의 통계를 조회합니다.",
 	request: {
 		query: z.object({
-			content: z.string().optional().openapi({
-				param: { name: "content", in: "path", required: false },
-				example: "hashtag",
-			}),
-			type: z.string().openapi({
-				param: { name: "type", in: "path", required: true },
-				example: "hour | date",
-			}),
-			start: z.string().optional().openapi({
-				param: { name: "start", in: "path", required: false },
-				example: "2023-10-29 | 2023-10-29 18",
-			}),
-			end: z.string().optional().openapi({
-				param: { name: "end", in: "path", required: false },
-				example: "2023-10-29 | 2023-10-29 18",
-			}),
-			value: z.string().optional().openapi({
-				param: { name: "value", in: "path", required: false },
-				example: "postings | views | likes | shares",
-			}),
+			content: z.string().optional(),
+			type: z.string(),
+			start: z.string().optional(),
+			end: z.string().optional(),
+			value: z.string().optional(),
 		}),
 	},
 	responses: {
@@ -36,14 +21,19 @@ export const summationRoute = createRoute({
 			description: "게시물 통계 조회 완료",
 			...openApiJson(summationSchema.openapi({
 				example: {
-					content: "hashtag",
-					value: "postings",
-					data: {
+					data: [{
 						day: "2023-10-29",
-						value: 33,
-					},
+						postings: 33,
+						views: 100,
+						likes: 550,
+						shares: 1,
+					}],
 				},
 			})),
+		},
+		400: {
+			description: "유효하지 않은 요청",
+			...errorJson(z.string().openapi({ example: "Invalid request" })),
 		},
 		404: {
 			description: "게시물 통계가 존재하지 않습니다.",
