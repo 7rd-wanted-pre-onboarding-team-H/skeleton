@@ -4,7 +4,7 @@ import { summationController } from "./summation_controller.ts"
 
 const { client } = await tempAppFrom(summationController)
 
-Deno.test(`put /likes/{id}`, async (t) => {
+Deno.test(`get /summations`, async (t) => {
 	await t.step("존재하지 게시물의 통계 요청", async () => {
 		const res = await client.summations.$get({
 			query: {
