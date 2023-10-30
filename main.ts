@@ -5,7 +5,7 @@ import { serveOpenapi } from "./swagger.ts"
 import { helloController } from "./hello/mod.ts"
 import { postingController, postingListController, postingShareController } from "./posting/mod.ts"
 import { likesController } from "./likes/mod.ts"
-import { signupController } from "./auth/mod.ts"
+import { signInController, signupController } from "./auth/mod.ts"
 import { summationController } from "./summation/mod.ts"
 import { kyselyFrom } from "./kysely_from.ts"
 import { ParseJSONResultsPlugin } from "kysely"
@@ -20,8 +20,9 @@ const db = dbPath === ":memory:" ? await seeded(rawDb) : rawDb
 
 const app = new OpenAPIHono()
 	.use("*", logger(), prettyJSON())
-	.route("", signupController(db))
 	.route("", helloController())
+	.route("", signupController(db))
+	.route("", signInController(db))
 	.route("", likesController(db))
 	.route("", summationController(db))
 	.route("", postingController(db))

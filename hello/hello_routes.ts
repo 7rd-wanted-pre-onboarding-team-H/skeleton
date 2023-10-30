@@ -13,6 +13,12 @@ export const helloRoute = createRoute({
 				example: "world",
 			}),
 		}),
+		cookies: z.object({
+			"access-token": z.string().openapi({
+				description: "JWT 토큰",
+				example: "Bearer <token>",
+			}),
+		}),
 	},
 	responses: {
 		200: {

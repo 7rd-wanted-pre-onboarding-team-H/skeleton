@@ -7,7 +7,7 @@ import { down, up } from "./migrate.ts"
 
 export const seedUser = async (db: Kysely<DB>) => {
 	const users = Array.from({ length: 10 }, () => ({
-		name: faker.person.fullName(),
+		name: faker.internet.userName(),
 		email: faker.internet.email(),
 		password: faker.internet.password(),
 		created_at: faker.date.recent({ days: 30, refDate: new Date("2023-01-01") }).toISOString(),

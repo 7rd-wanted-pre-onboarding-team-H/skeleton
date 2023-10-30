@@ -40,8 +40,8 @@ export interface User {
 	email: string
 	id: Generated<number>
 	is_validated: Generated<number>
-	name: string
 	password: string
+	name: string
 }
 
 export interface DB {
