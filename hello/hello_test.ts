@@ -2,9 +2,11 @@ import { assertEquals } from "https://deno.land/std@0.204.0/assert/assert_equals
 import { tempAppFrom } from "../test_utils.ts"
 import { helloController } from "./hello_controller.ts"
 
+// deno-lint-ignore no-explicit-any
 const { client } = await tempAppFrom(helloController as any)
 
 Deno.test(`GET /hello/world`, async () => {
+	// deno-lint-ignore no-explicit-any
 	const res = await (client as any).hello[":name"].$get({
 		param: { name: "world" },
 		cookie: {
