@@ -4,6 +4,7 @@ import { OpenAPIHono } from "hono_zod_openapi"
 import { summationRoute } from "./summation_routes.ts"
 import { getSummation } from "./summation_data.ts"
 import dayjs from "dayjs"
+import { JwtPayload } from "../auth/signin_controller.ts"
 
 type ReqestQuery = {
 	content?: string
@@ -24,9 +25,12 @@ export type SummationSqlOption = {
 export const summationController = (db: Kysely<DB>) =>
 	new OpenAPIHono().openapi(summationRoute, async (c) => {
 		const query = c.req.valid("query")
+		// FIXME: 계정명도 해시태그로 취급해야함
+		const { username } = c.get("jwtPayload") as JwtPayload
+		const content = query.content || username
 
 		try {
-			const summationOption = convertQueryToOption(query)
+			const summationOption = convertQueryToOption({ ...query, content })
 
 			const endMinusStart = dayjs(summationOption.end, "YYYY-MM-DD").diff(
 				dayjs(summationOption.start, "YYYY-MM-DD"),

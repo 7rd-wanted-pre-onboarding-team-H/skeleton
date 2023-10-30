@@ -11,7 +11,7 @@ export const signInUser = createRoute({
 			content: {
 				"application/json": {
 					schema: z.object({
-						name: z.string().openapi({ example: "jimin" }),
+						name: z.string().openapi({ example: "dani" }),
 						password: z.string().openapi({ example: "password123!" }),
 					}),
 				},
@@ -29,7 +29,7 @@ export const signInUser = createRoute({
 			},
 			content: {
 				"application/json": {
-					schema: z.string().openapi({ example: "로그인에 성공했습니다." }),
+					schema: z.object({ message: z.string().openapi({ example: "로그인에 성공했습니다." }) }),
 				},
 			},
 		},
