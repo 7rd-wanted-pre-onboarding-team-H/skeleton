@@ -4,6 +4,7 @@ import { OpenAPIHono } from "hono_zod_openapi"
 import { postingListRoute, postingRoute, postingShareRoute } from "./posting_routes.ts"
 import { getPostingList, getSinglePosting, updateShare, updateViewCount } from "./posting_data.ts"
 import typeUrl from "./typeUrl.json" with { type: "json" }
+import { JwtPayload } from "../auth/signin_controller.ts"
 
 export const postingController = (db: Kysely<DB>) =>
 	new OpenAPIHono().openapi(postingRoute, async (c) => {
@@ -21,13 +22,14 @@ export const postingController = (db: Kysely<DB>) =>
 export const postingListController = (db: Kysely<DB>) =>
 	new OpenAPIHono().openapi(postingListRoute, async (c) => {
 		const query = c.req.valid("query")
-
-		// TODO: 유저 정보 넘겨받는 방법 (header?)에 따라 hastag default 값 정하기(계정 아이디)
+        // FIXME: 사용자 계정명 대신 해시태그로 취급해야함
+		const { username } = c.get("jwtPayload") as JwtPayload
+		const hashtag = query.hashtag || username
 
 		// 페이지 설정
 		const pageOffset = query.page > 1 ? query.page_count * (query.page - 1) : 0
 
-		const posting = await getPostingList(db, { ...query, pageOffset })
+		const posting = await getPostingList(db, { ...query, hashtag, pageOffset })
 
 		// TODO: 날짜 format 맞춘다면 dayjs 사용
 		return posting ? c.jsonT(posting) : c.jsonT({ error: "Not Found" }, 404)
