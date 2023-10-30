@@ -71,10 +71,10 @@ export const signupController = (db: Kysely<DB>) =>
 				if (otp !== code) {
 					return c.jsonT({ error: "인증정보가 일치하지 않습니다." }, 400)
 				}
-                await trx.updateTable("user")
-                    .set({ is_validated: 1 })
-                    .where("id", "=", id)
-                    .executeTakeFirstOrThrow()
+				await trx.updateTable("user")
+					.set({ is_validated: 1 })
+					.where("id", "=", id)
+					.executeTakeFirstOrThrow()
 
 				return c.jsonT(user, 200)
 			})
