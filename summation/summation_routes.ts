@@ -9,11 +9,13 @@ export const summationRoute = createRoute({
 	summary: "해당 해시태그 게시물의 통계를 조회합니다.",
 	request: {
 		query: z.object({
-			content: z.string().optional(),
-			type: z.string(),
-			start: z.string().optional(),
-			end: z.string().optional(),
-			value: z.string().optional(),
+			content: z.string().optional().openapi({ example: "Hashtag Name" }),
+			type: z.string().openapi({ example: "hour | date" }),
+			start: z.string().optional().openapi({ example: "2023-10-25" }),
+			end: z.string().optional().openapi({ example: "2023-10-26" }),
+			value: z.string().optional().openapi({
+				example: "postings|views|likes|shares",
+			}),
 		}),
 	},
 	responses: {
@@ -21,12 +23,11 @@ export const summationRoute = createRoute({
 			description: "게시물 통계 조회 완료",
 			...openApiJson(summationSchema.openapi({
 				example: {
+					content: "hashtag",
+					value: "postings",
 					data: [{
-						day: "2023-10-29",
-						postings: 33,
-						views: 100,
-						likes: 550,
-						shares: 1,
+						day: "2023-10-25",
+						count: 33,
 					}],
 				},
 			})),

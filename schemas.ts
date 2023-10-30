@@ -54,11 +54,10 @@ export const dbSchema = z.object({
 })
 
 export const summationSchema = z.object({
+	content: z.string(),
+	value: z.string(),
 	data: z.array(z.object({
 		day: z.string(),
-		postings: z.number(),
-		views: z.number(),
-		likes: z.number(),
-		shares: z.number(),
+		count: z.number(),
 	})),
 })
