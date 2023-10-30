@@ -13,6 +13,7 @@ export type JwtPayload = {
 	sub: string
 	exp: number
 	userId: number
+	username: string
 	validated: boolean
 }
 
@@ -29,10 +30,11 @@ export const signInController = (db: Kysely<DB>) => {
 			return c.jsonT({ error: "로그인 실패" }, 401)
 		}
 		const payload: JwtPayload = {
-			iat: Date.now() % 1000, // 1000 으로 나눠서 초 단위로 만들어줌
+			iat: Date.now() / 1000, // 1000 으로 나눠서 초 단위로 만들어줌
 			sub: "wanted social-feed user",
-			exp: Date.now() % 1000 + (60 * 60 * 24 * 1),
+			exp: Date.now() / 1000 + (60 * 60 * 24 * 1),
 			userId: user.id,
+			username: user.name,
 			validated: Boolean(user.is_validated),
 		}
 		const token = await sign(payload, config().SECRET_KEY)
